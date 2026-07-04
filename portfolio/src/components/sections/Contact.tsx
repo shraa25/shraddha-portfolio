@@ -16,9 +16,9 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
-const EMAILJS_SERVICE_ID  = "service_wjspo3n";
-const EMAILJS_TEMPLATE_ID = "template_aqdgx68";
-const EMAILJS_PUBLIC_KEY  = "e5tzBNxGDZLvI58ML";
+const EMAILJS_SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 const GithubIcon = () => (
   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -51,7 +51,7 @@ export default function Contact() {
         EMAILJS_PUBLIC_KEY
       );
       setStatus("success"); reset();
-    } catch { setStatus("error"); }
+    } catch (err: any) { console.error("EmailJS error:", err?.text || err?.message || err); setStatus("error"); }
   };
 
   const inputStyle = {

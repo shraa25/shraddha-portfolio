@@ -9,7 +9,7 @@ export default function Journey() {
     <SectionWrapper id="experience" className="py-24 px-6 md:px-[8%]">
       <TransmitText text="Learning Journey" as="h2" className="text-4xl font-bold text-center mb-4" />
       <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
-        // signal.path
+        {"// signal.path"}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">

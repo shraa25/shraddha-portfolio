@@ -59,7 +59,7 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          // signal.init()
+          {"// signal.init()"}
         </motion.p>
 
         <TransmitText

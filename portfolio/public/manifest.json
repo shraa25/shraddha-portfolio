@@ -1,0 +1,12 @@
+{
+  "name": "Shraddha More — SYNAPSE Portfolio",
+  "short_name": "Shraddha More",
+  "description": "Python Developer | AI & Data Science Engineer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04040a",
+  "theme_color": "#7C3AED",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "any", "type": "image/x-icon" }
+  ]
+}

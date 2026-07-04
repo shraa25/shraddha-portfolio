@@ -34,6 +34,7 @@ export default function Navbar() {
 
   return (
     <nav
+      aria-label="Main navigation"
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
         scrolled ? "glass-card border-b" : "bg-transparent border-transparent"
@@ -54,6 +55,7 @@ export default function Navbar() {
               <a
                 href={href}
                 data-cursor={label}
+                aria-current={active === href.slice(1) ? "page" : undefined}
                 className={cn(
                   "font-mono text-xs tracking-wider transition-all duration-200 relative",
                   active === href.slice(1)
@@ -78,7 +80,9 @@ export default function Navbar() {
           className="md:hidden"
           onClick={() => setOpen(!open)}
           style={{ color: "rgba(226,232,240,0.7)" }}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -86,6 +90,7 @@ export default function Navbar() {
 
       {open && (
         <div
+          id="mobile-nav"
           className="md:hidden glass-card border-t px-6 pb-5 flex flex-col gap-4"
           style={{ borderColor: "rgba(124,58,237,0.15)" }}
         >

@@ -9,7 +9,7 @@ export default function Achievements() {
     <SectionWrapper id="achievements" className="py-24 px-6 md:px-[8%]">
       <TransmitText text="Achievements" as="h2" className="text-4xl font-bold text-center mb-4" />
       <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
-        // nodes.fired
+        {"// nodes.fired"}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">

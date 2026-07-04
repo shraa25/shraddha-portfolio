@@ -13,7 +13,7 @@ export default function About() {
         className="text-4xl font-bold text-center mb-4"
       />
       <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
-        // node.profile
+        {"// node.profile"}
       </p>
 
       <div className="max-w-3xl mx-auto text-center mb-12 space-y-3 text-sm leading-relaxed" style={{ color: "rgba(226,232,240,0.55)" }}>

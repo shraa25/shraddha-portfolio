@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -12,27 +12,29 @@ interface Props {
 
 export default function TransmitText({ text, className = "", as: Tag = "span", delay = 0 }: Props) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref as React.RefObject<Element>, { once: true, margin: "-60px" });
   const reduced = useReducedMotion();
 
-  const chars = text.split("");
-
   if (reduced) {
-    return <Tag ref={ref as React.RefObject<HTMLHeadingElement>} className={className}>{text}</Tag>;
+    return (
+      <Tag ref={ref as React.RefObject<HTMLHeadingElement & HTMLParagraphElement>} className={className}>
+        {text}
+      </Tag>
+    );
   }
 
   return (
-    <Tag ref={ref as React.RefObject<HTMLHeadingElement>} className={className} aria-label={text}>
-      {chars.map((char, i) => (
+    <Tag
+      ref={ref as React.RefObject<HTMLHeadingElement & HTMLParagraphElement>}
+      className={className}
+      aria-label={text}
+    >
+      {text.split("").map((char, i) => (
         <motion.span
           key={i}
           initial={{ opacity: 0, y: 6 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{
-            duration: 0.04,
-            delay: delay + i * 0.03,
-            ease: "easeOut",
-          }}
+          transition={{ duration: 0.04, delay: delay + i * 0.03, ease: "easeOut" }}
           className="inline-block"
           aria-hidden="true"
         >

@@ -8,35 +8,39 @@ export default function CustomCursor() {
   const trailRef = useRef<HTMLCanvasElement>(null);
   const [label, setLabel] = useState("");
   const [hovered, setHovered] = useState(false);
+  // Render nothing on server; on client, check pointer capability synchronously
+  // via useState lazy initializer — runs only once, no setState-in-effect.
+  const [isPointer] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(pointer: fine)").matches;
+  });
   const reduced = useReducedMotion();
-  const pos = useRef({ x: -100, y: -100 });
   const trail = useRef<{ x: number; y: number }[]>([]);
 
   useEffect(() => {
-    if (reduced) return;
+    // Guard: skip on touch devices or when reduced motion is requested
+    if (!isPointer || reduced) return;
 
     const canvas = trailRef.current!;
     const ctx = canvas.getContext("2d")!;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    window.addEventListener("resize", () => {
+
+    const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-    });
+    };
+    resize();
+    window.addEventListener("resize", resize);
 
     let raf: number;
 
     const onMove = (e: MouseEvent) => {
-      pos.current = { x: e.clientX, y: e.clientY };
       trail.current.push({ x: e.clientX, y: e.clientY });
       if (trail.current.length > 18) trail.current.shift();
 
-      if (dotRef.current) {
+      if (dotRef.current)
         dotRef.current.style.transform = `translate(${e.clientX - 5}px, ${e.clientY - 5}px)`;
-      }
-      if (ringRef.current) {
+      if (ringRef.current)
         ringRef.current.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
-      }
 
       const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
       const interactive = el?.closest("a, button, [data-cursor]");
@@ -72,13 +76,16 @@ export default function CustomCursor() {
     drawTrail();
 
     window.addEventListener("mousemove", onMove);
+
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("resize", resize);
       cancelAnimationFrame(raf);
     };
-  }, [reduced]);
+  }, [isPointer, reduced]);
 
-  if (reduced) return null;
+  // Render nothing for touch devices or reduced-motion users
+  if (!isPointer || reduced) return null;
 
   return (
     <>
@@ -88,7 +95,6 @@ export default function CustomCursor() {
         style={{ zIndex: 9998 }}
         aria-hidden="true"
       />
-      {/* Core dot */}
       <div
         ref={dotRef}
         className="cursor-dot fixed w-2.5 h-2.5 rounded-full pointer-events-none"
@@ -100,7 +106,6 @@ export default function CustomCursor() {
         }}
         aria-hidden="true"
       />
-      {/* Hover ring */}
       <div
         ref={ringRef}
         className="cursor-dot fixed pointer-events-none flex items-center justify-center"
@@ -109,7 +114,9 @@ export default function CustomCursor() {
           height: hovered ? 56 : 32,
           borderRadius: "50%",
           border: `1px solid rgba(124,58,237,${hovered ? 0.8 : 0.4})`,
-          boxShadow: hovered ? "0 0 16px rgba(124,58,237,0.5), 0 0 32px rgba(34,211,238,0.2)" : "none",
+          boxShadow: hovered
+            ? "0 0 16px rgba(124,58,237,0.5), 0 0 32px rgba(34,211,238,0.2)"
+            : "none",
           transition: "width 0.2s ease, height 0.2s ease, border-color 0.2s, box-shadow 0.2s",
           zIndex: 9997,
         }}

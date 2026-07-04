@@ -27,12 +27,12 @@ interface Pulse {
 }
 
 function NeuralScene({ reduced }: { reduced: boolean }) {
-  const { size, camera } = useThree();
+  const { size } = useThree();
   const mousePos = useMousePosition();
 
   // Node positions
   const positions = useMemo(() => {
-    const rng = (s: number) => { let x = Math.sin(s) * 10000; return x - Math.floor(x); };
+    const rng = (s: number) => { const x = Math.sin(s) * 10000; return x - Math.floor(x); };
     return Array.from({ length: NODE_COUNT }, (_, i) => new THREE.Vector3(
       (rng(i * 3.1) - 0.5) * 3.2,
       (rng(i * 7.3) - 0.5) * 3.2,
@@ -151,7 +151,7 @@ function NeuralScene({ reduced }: { reduced: boolean }) {
 
       {/* Pulse dots */}
       {!reduced && (
-        <instancedMesh ref={pulseDotRef} args={[undefined, undefined, pulses.current.length || 20]}>
+        <instancedMesh ref={pulseDotRef} args={[undefined, undefined, 20]}>
           <sphereGeometry args={[1, 6, 6]} />
           <meshBasicMaterial color="#22D3EE" toneMapped={false} />
         </instancedMesh>
@@ -167,7 +167,8 @@ export default function NeuralNetwork() {
     <div
       style={{ width: 380, height: 380 }}
       className="relative"
-      aria-hidden="true"
+      role="img"
+      aria-label="Interactive 3D neural network visualisation"
     >
       {/* Glow backdrop */}
       <div

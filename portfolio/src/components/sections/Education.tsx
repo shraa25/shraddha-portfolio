@@ -14,7 +14,7 @@ export default function Education() {
     <SectionWrapper id="education" className="py-24 px-6 md:px-[8%]">
       <TransmitText text="Education" as="h2" className="text-4xl font-bold text-center mb-4" />
       <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
-        // node.origin
+        {"// node.origin"}
       </p>
 
       <div className="max-w-3xl mx-auto relative pl-8">
@@ -58,7 +58,7 @@ export default function Education() {
                 </span>
               ))}
             </div>
-            <p className="font-mono text-xs mb-2" style={{ color: "rgba(226,232,240,0.35)" }}>// relevant.subjects</p>
+            <p className="font-mono text-xs mb-2" style={{ color: "rgba(226,232,240,0.35)" }}>{"// relevant.subjects"}</p>
             <div className="flex flex-wrap gap-2">
               {SUBJECTS.map((s) => (
                 <span key={s} className="font-mono text-xs px-2 py-0.5 rounded" style={{ background: "rgba(59,130,246,0.08)", color: "rgba(59,130,246,0.8)", border: "1px solid rgba(59,130,246,0.15)" }}>

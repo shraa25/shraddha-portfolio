@@ -5,11 +5,12 @@ import { ArrowUp } from "lucide-react";
 export function Footer() {
   return (
     <footer
+      aria-label="Site footer"
       className="text-center py-10 px-4 border-t"
       style={{ borderColor: "rgba(124,58,237,0.15)" }}
     >
       <p className="font-mono text-xs mb-1" style={{ color: "rgba(226,232,240,0.35)" }}>
-        // signal.end — designed &amp; built by{" "}
+        {"// signal.end — designed & built by "}
         <span style={{ color: "#22D3EE" }}>Shraddha More</span>
       </p>
       <p className="font-mono text-xs" style={{ color: "rgba(124,58,237,0.5)" }}>

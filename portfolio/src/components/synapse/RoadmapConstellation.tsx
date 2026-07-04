@@ -106,7 +106,9 @@ export default function RoadmapConstellation() {
       className="w-full"
       style={{ height: 320 }}
       role="img"
-      aria-label="Roadmap constellation showing upcoming learning goals"
-    />
+      aria-label="Roadmap constellation showing upcoming learning goals: AI Engineering (active), Computer Vision, NLP, LLMs, MLOps, FastAPI, Docker, Kubernetes"
+    >
+      AI Engineering (active goal), Computer Vision, NLP, LLMs, MLOps, FastAPI, Docker, Kubernetes
+    </canvas>
   );
 }

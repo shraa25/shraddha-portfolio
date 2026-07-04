@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { Mail, Phone, MapPin, Download, Briefcase, Send } from "lucide-react";
 
 const schema = z.object({
@@ -12,6 +13,11 @@ const schema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 type FormData = z.infer<typeof schema>;
+
+// Replace these with your EmailJS credentials from emailjs.com
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
 const GithubIcon = () => (
   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -33,22 +39,26 @@ const CONTACTS = [
   { Icon: MapPin, label: "Kasheli, Balkum, Thane, Maharashtra", href: null },
 ];
 
-const inputCls = "w-full px-4 py-3 rounded-xl border border-border bg-card/50 backdrop-blur-sm text-sm focus:outline-none focus:border-violet-600 transition-colors";
+const inputCls =
+  "w-full px-4 py-3 rounded-xl border border-border bg-card/50 backdrop-blur-sm text-sm focus:outline-none focus:border-violet-600 transition-colors";
 
 export default function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema) });
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
   const onSubmit = async (data: FormData) => {
     setStatus("loading");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) { setStatus("success"); reset(); }
-      else setStatus("error");
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        { from_name: data.name, from_email: data.email, message: data.message },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus("success");
+      reset();
     } catch {
       setStatus("error");
     }
@@ -108,7 +118,12 @@ export default function Contact() {
           {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
         </div>
         <div>
-          <textarea {...register("message")} placeholder="Your Message" rows={4} className={`${inputCls} resize-none`} />
+          <textarea
+            {...register("message")}
+            placeholder="Your Message"
+            rows={4}
+            className={`${inputCls} resize-none`}
+          />
           {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
         </div>
         <button
@@ -119,8 +134,12 @@ export default function Contact() {
           <Send className="h-4 w-4" />
           {status === "loading" ? "Sending..." : "Send Message"}
         </button>
-        {status === "success" && <p className="text-green-400 text-sm text-center">Message sent successfully! ✅</p>}
-        {status === "error" && <p className="text-red-400 text-sm text-center">Something went wrong. Please try again.</p>}
+        {status === "success" && (
+          <p className="text-green-400 text-sm text-center">Message sent successfully! ✅</p>
+        )}
+        {status === "error" && (
+          <p className="text-red-400 text-sm text-center">Something went wrong. Please try again.</p>
+        )}
       </motion.form>
 
       <div className="flex justify-center gap-3 flex-wrap">

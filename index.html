@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shraddha More | Portfolio</title>
+  <title>Shraddha More | Python Developer | AI &amp; Data Science Portfolio</title>
+  <meta name="description" content="Portfolio of Shraddha More showcasing Python, Django, Flask, Machine Learning, AI, Data Science and Full Stack Development projects."/>
+  <meta name="keywords" content="Shraddha More, Python Developer, Django, Flask, Machine Learning, AI, Data Science, Full Stack, Portfolio"/>
+  <meta name="author" content="Shraddha More"/>
+  <meta property="og:title" content="Shraddha More | Python Developer | AI &amp; Data Science Portfolio"/>
+  <meta property="og:description" content="Portfolio of Shraddha More showcasing Python, Django, Flask, Machine Learning, AI, Data Science and Full Stack Development projects."/>
+  <meta property="og:type" content="website"/>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -16,10 +22,11 @@
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Journey</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
@@ -37,16 +44,17 @@
       <p class="greeting">Hi there 👋, I'm</p>
       <h1>Shraddha More</h1>
       <h2 class="typed-wrapper"><span id="typed"></span></h2>
-      <p class="hero-desc">Passionate about building real-world applications and solving problems through technology.</p>
+      <p class="hero-desc">Motivated B.Sc. Computer Science graduate (2026) passionate about building scalable web applications and AI-powered solutions. Experienced in Python, Django, Flask, SQL, Machine Learning, and cloud deployment.</p>
       <div class="hero-btns">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-outline">Contact Me</a>
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
+        <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
+        <a href="resume.pdf" download class="btn btn-outline"><i class="fas fa-download"></i> Resume</a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="avatar-ring">
         <div class="avatar">
-          <img src="photo.jpg" alt="Shraddha More" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+          <img src="photo.jpg" alt="Shraddha More" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
           <span class="avatar-fallback">SM</span>
         </div>
       </div>
@@ -56,65 +64,40 @@
   <!-- About -->
   <section id="about" class="section about">
     <h2 class="section-title">About <span>Me</span></h2>
+    <div class="about-intro">
+      <p>I am an aspiring <strong>Python Developer</strong> with a strong interest in Artificial Intelligence, Data Science, and Backend Development. I enjoy solving real-world problems by building intelligent applications using Python and modern frameworks.</p>
+      <p>Currently expanding my knowledge in Machine Learning, Deep Learning, Data Science, REST APIs, Cloud Deployment, and Backend Development. My goal is to become an <strong>AI Engineer / Data Scientist</strong> while continuously improving my software engineering skills.</p>
+    </div>
     <div class="about-grid">
       <div class="about-card glass">
         <i class="fas fa-graduation-cap"></i>
         <h3>Education</h3>
-        <p>Graduated in Computer Science</p>
+        <p>B.Sc. Computer Science · CGPA 9.50 · JVM Mehta Degree College</p>
       </div>
       <div class="about-card glass">
         <i class="fas fa-code"></i>
-        <h3>Developer</h3>
-        <p>Aspiring Python Developer with hands-on experience in Flask & Django</p>
+        <h3>Python Developer</h3>
+        <p>Building scalable backend applications with Django, Flask &amp; REST APIs</p>
       </div>
       <div class="about-card glass">
         <i class="fas fa-brain"></i>
-        <h3>ML Enthusiast</h3>
-        <p>Machine Learning enthusiast working with TensorFlow & scikit-learn</p>
+        <h3>AI &amp; ML Enthusiast</h3>
+        <p>Classification models, Deep Learning, TensorFlow &amp; scikit-learn</p>
       </div>
       <div class="about-card glass">
         <i class="fab fa-aws"></i>
-        <h3>Cloud</h3>
-        <p>Experience with AWS cloud services and deployment</p>
+        <h3>Cloud &amp; DevOps</h3>
+        <p>AWS basics, cloud deployment, Git &amp; GitHub version control</p>
       </div>
-    </div>
-  </section>
-
-  <!-- Experience -->
-  <section id="experience" class="section experience">
-    <h2 class="section-title">Experience & <span>Internships</span></h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card glass">
-          <div class="timeline-header">
-            <div>
-              <h3>Python Developer Intern</h3>
-              <p class="company"><i class="fas fa-building"></i> Tech Company</p>
-            </div>
-            <span class="timeline-date">2024</span>
-          </div>
-          <p>Developed and maintained Python-based applications, worked with Flask for backend services, and contributed to ML model integrations.</p>
-          <div class="timeline-tags">
-            <span>Python</span><span>Flask</span><span>MySQL</span>
-          </div>
-        </div>
+      <div class="about-card glass">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Location</h3>
+        <p>Kasheli, Balkum, Thane, Maharashtra</p>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card glass">
-          <div class="timeline-header">
-            <div>
-              <h3>Machine Learning Intern</h3>
-              <p class="company"><i class="fas fa-building"></i> AI Startup</p>
-            </div>
-            <span class="timeline-date">2023</span>
-          </div>
-          <p>Built and trained classification models using scikit-learn and TensorFlow. Performed data preprocessing, EDA, and model evaluation.</p>
-          <div class="timeline-tags">
-            <span>Python</span><span>TensorFlow</span><span>Pandas</span><span>NumPy</span>
-          </div>
-        </div>
+      <div class="about-card glass">
+        <i class="fas fa-bullseye"></i>
+        <h3>Goal</h3>
+        <p>AI Engineer / Data Scientist building real-world intelligent solutions</p>
       </div>
     </div>
   </section>
@@ -128,32 +111,69 @@
         <div class="timeline-card glass">
           <div class="timeline-header">
             <div>
-              <h3>Bachelor of Engineering</h3>
-              <p class="company"><i class="fas fa-university"></i> Computer Science & Engineering</p>
+              <h3>Bachelor of Science – Computer Science</h3>
+              <p class="company"><i class="fas fa-university"></i> JVM Mehta Degree College, Airoli, Navi Mumbai</p>
             </div>
-            <span class="timeline-date">2021 – 2025</span>
+            <span class="timeline-date">July 2023 – May 2026</span>
           </div>
-          <p>Studied core computer science subjects including Data Structures, Algorithms, Machine Learning, Database Management, and Web Development.</p>
+          <p>Pursuing B.Sc. Computer Science with an outstanding CGPA of 9.50 (A Grade). Active member of Coding Club, Placement Cell Volunteer, and Tech Fest Volunteer.</p>
           <div class="timeline-tags">
-            <span>Computer Science</span><span>Machine Learning</span><span>Web Dev</span>
+            <span>CGPA: 9.50</span><span>A Grade</span><span>Coding Club</span><span>Placement Cell</span><span>Tech Fest</span>
+          </div>
+          <div class="edu-subjects">
+            <p class="subjects-label">Relevant Subjects:</p>
+            <div class="timeline-tags">
+              <span>Data Structures</span><span>Algorithms</span><span>Python Programming</span><span>DBMS</span><span>Operating Systems</span><span>Machine Learning</span><span>Artificial Intelligence</span><span>Software Engineering</span><span>Web Development</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card glass">
-          <div class="timeline-header">
-            <div>
-              <h3>Higher Secondary (12th)</h3>
-              <p class="company"><i class="fas fa-school"></i> Science Stream</p>
-            </div>
-            <span class="timeline-date">2021</span>
-          </div>
-          <p>Completed HSC with Science stream, focusing on Mathematics, Physics, and Computer Science fundamentals.</p>
-          <div class="timeline-tags">
-            <span>Science</span><span>Mathematics</span><span>Computer Science</span>
-          </div>
-        </div>
+    </div>
+  </section>
+
+  <!-- Learning Journey (replaces fake Experience) -->
+  <section id="experience" class="section experience">
+    <h2 class="section-title">Learning <span>Journey</span></h2>
+    <div class="journey-grid">
+      <div class="journey-card glass">
+        <div class="journey-icon"><i class="fab fa-python"></i></div>
+        <h3>Python Developer</h3>
+        <ul>
+          <li>Daily hands-on coding</li>
+          <li>Backend development</li>
+          <li>REST APIs</li>
+          <li>Problem Solving</li>
+        </ul>
+      </div>
+      <div class="journey-card glass">
+        <div class="journey-icon"><i class="fas fa-robot"></i></div>
+        <h3>Machine Learning</h3>
+        <ul>
+          <li>Classification Models</li>
+          <li>Data Cleaning</li>
+          <li>Feature Engineering</li>
+          <li>Model Evaluation</li>
+        </ul>
+      </div>
+      <div class="journey-card glass">
+        <div class="journey-icon"><i class="fas fa-server"></i></div>
+        <h3>Backend Development</h3>
+        <ul>
+          <li>Django</li>
+          <li>Flask</li>
+          <li>Authentication</li>
+          <li>CRUD Applications</li>
+        </ul>
+      </div>
+      <div class="journey-card glass">
+        <div class="journey-icon"><i class="fab fa-aws"></i></div>
+        <h3>Cloud</h3>
+        <ul>
+          <li>AWS Basics</li>
+          <li>Deployment</li>
+          <li>GitHub</li>
+          <li>Version Control</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -163,52 +183,64 @@
     <h2 class="section-title">Tech <span>Stack</span></h2>
     <div class="skills-container">
       <div class="skill-category">
-        <h3>Languages & Frameworks</h3>
+        <h3><i class="fas fa-code"></i> Programming &amp; Backend</h3>
         <div class="skill-bars">
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span><i class="fab fa-python"></i> Python</span><span class="pct">90%</span></div>
+            <div class="skill-bar-header"><span><i class="fab fa-python"></i> Python</span><span class="pct">95%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>🎯 Django</span><span class="pct">90%</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
           </div>
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span>🌐 Flask</span><span class="pct">80%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+            <div class="skill-bar-header"><span>🌐 Flask</span><span class="pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
           </div>
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span>🎯 Django</span><span class="pct">75%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+            <div class="skill-bar-header"><span><i class="fas fa-plug"></i> REST APIs</span><span class="pct">82%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
           </div>
         </div>
       </div>
       <div class="skill-category">
-        <h3>Machine Learning</h3>
+        <h3><i class="fas fa-brain"></i> ML &amp; Data Science</h3>
         <div class="skill-bars">
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span>🤖 TensorFlow</span><span class="pct">75%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
-          </div>
-          <div class="skill-bar-item">
-            <div class="skill-bar-header"><span>📊 scikit-learn</span><span class="pct">82%</span></div>
+            <div class="skill-bar-header"><span>🤖 Machine Learning</span><span class="pct">82%</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
           </div>
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span>🐼 Pandas / NumPy</span><span class="pct">85%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+            <div class="skill-bar-header"><span>🐼 Pandas</span><span class="pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>🔢 NumPy</span><span class="pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span>📊 Matplotlib / Seaborn</span><span class="pct">80%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
           </div>
         </div>
       </div>
       <div class="skill-category">
-        <h3>Tools & Cloud</h3>
+        <h3><i class="fas fa-tools"></i> Tools, DB &amp; Cloud</h3>
         <div class="skill-bars">
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span><i class="fab fa-aws"></i> AWS</span><span class="pct">70%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+            <div class="skill-bar-header"><span><i class="fas fa-database"></i> SQL / MySQL</span><span class="pct">88%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
           </div>
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span><i class="fas fa-database"></i> MySQL</span><span class="pct">80%</span></div>
-            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
+            <div class="skill-bar-header"><span><i class="fab fa-github"></i> Git / GitHub</span><span class="pct">90%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
           </div>
           <div class="skill-bar-item">
-            <div class="skill-bar-header"><span><i class="fab fa-github"></i> Git / GitHub</span><span class="pct">85%</span></div>
+            <div class="skill-bar-header"><span><i class="fab fa-aws"></i> AWS</span><span class="pct">75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header"><span><i class="fab fa-html5"></i> HTML / CSS / JS</span><span class="pct">85%</span></div>
             <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
           </div>
         </div>
@@ -216,19 +248,23 @@
     </div>
     <div class="skills-pills">
       <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
-      <div class="skill-item"><i class="fab fa-aws"></i><span>AWS</span></div>
+      <div class="skill-item"><span class="pill-label">Dj</span><span>Django</span></div>
       <div class="skill-item"><i class="fas fa-flask"></i><span>Flask</span></div>
-      <div class="skill-item"><span style="font-weight:700;color:var(--accent2)">Dj</span><span>Django</span></div>
+      <div class="skill-item"><i class="fas fa-plug"></i><span>REST APIs</span></div>
       <div class="skill-item"><i class="fas fa-database"></i><span>MySQL</span></div>
-      <div class="skill-item"><i class="fas fa-robot"></i><span>TensorFlow</span></div>
-      <div class="skill-item"><i class="fas fa-chart-line"></i><span>scikit-learn</span></div>
+      <div class="skill-item"><i class="fas fa-database"></i><span>SQLite</span></div>
+      <div class="skill-item"><i class="fas fa-robot"></i><span>Machine Learning</span></div>
+      <div class="skill-item"><i class="fas fa-network-wired"></i><span>Deep Learning</span></div>
       <div class="skill-item"><i class="fas fa-table"></i><span>Pandas</span></div>
       <div class="skill-item"><i class="fas fa-calculator"></i><span>NumPy</span></div>
       <div class="skill-item"><i class="fas fa-chart-bar"></i><span>Matplotlib</span></div>
+      <div class="skill-item"><i class="fas fa-chart-area"></i><span>Seaborn</span></div>
+      <div class="skill-item"><i class="fab fa-aws"></i><span>AWS</span></div>
       <div class="skill-item"><i class="fab fa-github"></i><span>GitHub</span></div>
       <div class="skill-item"><i class="fas fa-code-branch"></i><span>Git</span></div>
-      <div class="skill-item"><i class="fas fa-vial"></i><span>Selenium</span></div>
-      <div class="skill-item"><span style="font-weight:700;color:var(--accent2)">Ap</span><span>Apache</span></div>
+      <div class="skill-item"><i class="fab fa-html5"></i><span>HTML/CSS</span></div>
+      <div class="skill-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="skill-item"><i class="fab fa-bootstrap"></i><span>Bootstrap</span></div>
     </div>
   </section>
 
@@ -238,57 +274,106 @@
     <div class="projects-grid">
 
       <div class="project-card glass">
-        <div class="project-icon"><i class="fas fa-users-cog"></i></div>
-        <h3>Student Management System</h3>
-        <p>A Flask-based system with login, signup, CRUD operations, search, dashboard analytics, flash messages, and SQLite database. Deployed live on Render.</p>
+        <div class="project-icon"><i class="fas fa-shopping-cart"></i></div>
+        <h3>ShopSphere – AI Powered E-Commerce</h3>
+        <p>Full-stack AI-powered e-commerce platform built with Django. Features user authentication, product search, categories, shopping cart, wishlist, checkout, order history, profile management, and responsive UI.</p>
         <div class="project-tags">
-          <span>Flask</span><span>SQLite</span><span>Bootstrap</span><span>Chart.js</span><span>Render</span>
+          <span>Python</span><span>Django</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SQLite</span><span>GitHub</span>
         </div>
         <div class="project-links">
-          <a href="https://student-management-system-4-55ii.onrender.com" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-          <a href="https://github.com/shraa25/student-management-system" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> Code</a>
+          <a href="https://github.com/shraa25" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card glass">
+        <div class="project-icon"><i class="fas fa-users-cog"></i></div>
+        <h3>Student Management System</h3>
+        <p>Complete student management platform with authentication, CRUD operations, analytics dashboard, charts, session management, responsive UI, and cloud deployment on Render.</p>
+        <div class="project-tags">
+          <span>Python</span><span>Flask</span><span>MySQL</span><span>Bootstrap</span><span>Chart.js</span><span>Render</span>
+        </div>
+        <div class="project-links">
+          <a href="https://student-management-system-4-55ii.onrender.com" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+          <a href="https://github.com/shraa25/student-management-system" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
 
       <div class="project-card glass">
         <div class="project-icon"><i class="fas fa-robot"></i></div>
-        <h3>ML Classification Model</h3>
-        <p>Built a machine learning model using scikit-learn and TensorFlow for real-world data classification with high accuracy.</p>
+        <h3>ML Classification Project</h3>
+        <p>Built machine learning models for classification using Scikit-learn and TensorFlow with preprocessing, feature engineering, training, testing, and evaluation on real-world datasets.</p>
         <div class="project-tags">
-          <span>Python</span><span>TensorFlow</span><span>scikit-learn</span>
+          <span>Python</span><span>Scikit-Learn</span><span>TensorFlow</span><span>Pandas</span><span>NumPy</span>
         </div>
         <div class="project-links">
-          <a href="https://github.com/shraa25" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> Code</a>
-        </div>
-      </div>
-
-      <div class="project-card glass">
-        <div class="project-icon"><i class="fas fa-spider"></i></div>
-        <h3>Web Scraper</h3>
-        <p>Automated data extraction tool using Selenium and Python for structured data collection and analysis.</p>
-        <div class="project-tags">
-          <span>Python</span><span>Selenium</span><span>Pandas</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/shraa25" target="_blank" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> Code</a>
+          <a href="https://github.com/shraa25" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
 
     </div>
     <div class="github-link">
-      <a href="https://github.com/shraa25" target="_blank" class="btn btn-primary">
+      <a href="https://github.com/shraa25" target="_blank" rel="noopener" class="btn btn-primary">
         <i class="fab fa-github"></i> View All on GitHub
       </a>
     </div>
   </section>
 
   <!-- GitHub Stats -->
-  <section class="section stats">
+  <section id="github" class="section stats">
     <h2 class="section-title">GitHub <span>Stats</span></h2>
     <div class="stats-grid">
-      <img src="https://github-readme-stats.vercel.app/api?username=shraa25&theme=dark&hide_border=false&include_all_commits=false&count_private=false" alt="GitHub Stats"/>
-      <img src="https://streak-stats.demolab.com/?user=shraa25&theme=dark&hide_border=false" alt="GitHub Streak"/>
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shraa25&theme=dark&hide_border=false&layout=compact" alt="Top Languages"/>
+      <img src="https://github-readme-stats.vercel.app/api?username=shraa25&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&show_icons=true" alt="GitHub Stats" loading="lazy"/>
+      <img src="https://streak-stats.demolab.com/?user=shraa25&theme=tokyonight&hide_border=true" alt="GitHub Streak" loading="lazy"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shraa25&theme=tokyonight&hide_border=true&layout=compact&langs_count=8" alt="Top Languages" loading="lazy"/>
+    </div>
+    <div class="github-contrib">
+      <img src="https://github-readme-activity-graph.vercel.app/graph?username=shraa25&theme=tokyo-night&hide_border=true&area=true" alt="Contribution Graph" loading="lazy"/>
+    </div>
+    <div class="github-link" style="margin-top:2rem;">
+      <a href="https://github.com/shraa25" target="_blank" rel="noopener" class="btn btn-primary">
+        <i class="fab fa-github"></i> Visit GitHub Profile
+      </a>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements" class="section achievements">
+    <h2 class="section-title">My <span>Achievements</span></h2>
+    <div class="achievements-grid">
+      <div class="achievement-card glass">
+        <div class="achievement-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>B.Sc. Computer Science</h3>
+        <p>CGPA 9.50 · A Grade</p>
+      </div>
+      <div class="achievement-card glass">
+        <div class="achievement-icon"><i class="fas fa-layer-group"></i></div>
+        <h3>Multiple Full Stack Projects</h3>
+        <p>Built production-ready Django &amp; Flask applications</p>
+      </div>
+      <div class="achievement-card glass">
+        <div class="achievement-icon"><i class="fas fa-fire"></i></div>
+        <h3>Daily Python Learning</h3>
+        <p>Consistent daily coding practice &amp; problem solving</p>
+      </div>
+      <div class="achievement-card glass">
+        <div class="achievement-icon"><i class="fas fa-brain"></i></div>
+        <h3>AI &amp; Data Science Enthusiast</h3>
+        <p>Hands-on ML models with TensorFlow &amp; scikit-learn</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Currently Learning -->
+  <section id="learning" class="section learning">
+    <h2 class="section-title">Currently <span>Learning</span></h2>
+    <div class="learning-grid">
+      <div class="learning-card glass"><i class="fas fa-chart-line"></i><span>Data Science</span></div>
+      <div class="learning-card glass"><i class="fas fa-network-wired"></i><span>Deep Learning</span></div>
+      <div class="learning-card glass"><i class="fas fa-chart-bar"></i><span>Matplotlib</span></div>
+      <div class="learning-card glass"><i class="fas fa-chart-area"></i><span>Seaborn</span></div>
+      <div class="learning-card glass"><i class="fas fa-database"></i><span>Advanced SQL</span></div>
+      <div class="learning-card glass"><i class="fas fa-bolt"></i><span>FastAPI</span></div>
+      <div class="learning-card glass"><i class="fab fa-docker"></i><span>Docker</span></div>
     </div>
   </section>
 
@@ -301,16 +386,34 @@
         <i class="fas fa-envelope"></i>
         <span>shraddhamore2528@gmail.com</span>
       </a>
-      <a href="https://github.com/shraa25" target="_blank" class="contact-card glass">
+      <a href="tel:+917700924001" class="contact-card glass">
+        <i class="fas fa-phone"></i>
+        <span>+91 7700924001</span>
+      </a>
+      <a href="https://github.com/shraa25" target="_blank" rel="noopener" class="contact-card glass">
         <i class="fab fa-github"></i>
         <span>github.com/shraa25</span>
       </a>
+      <a href="https://www.linkedin.com/in/shraddha-more-2528" target="_blank" rel="noopener" class="contact-card glass">
+        <i class="fab fa-linkedin"></i>
+        <span>linkedin.com/in/shraddha-more</span>
+      </a>
+      <div class="contact-card glass no-link">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Kasheli, Balkum, Thane, Maharashtra</span>
+      </div>
+    </div>
+    <div class="contact-actions">
+      <a href="resume.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Download Resume</a>
+      <a href="mailto:shraddhamore2528@gmail.com" class="btn btn-outline"><i class="fas fa-briefcase"></i> Hire Me</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>Designed & Built by <span>Shraddha More</span> · 2025</p>
+    <p>Designed &amp; Developed by <span>Shraddha More</span></p>
+    <p class="footer-role">Python Developer | AI &amp; Data Science Enthusiast</p>
+    <p class="footer-copy">© 2026 All Rights Reserved</p>
   </footer>
 
   <!-- Back to top -->

@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import SectionWrapper from "@/components/synapse/SectionWrapper";
+import TransmitText from "@/components/synapse/TransmitText";
 import { GITHUB_USERNAME } from "@/lib/data";
 
 const u = GITHUB_USERNAME;
@@ -10,61 +12,48 @@ const GithubIcon = () => (
   </svg>
 );
 
+const STATS = [
+  `https://github-readme-stats.vercel.app/api?username=${u}&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&show_icons=true&bg_color=00000000`,
+  `https://streak-stats.demolab.com/?user=${u}&theme=tokyonight&hide_border=true&background=00000000`,
+  `https://github-readme-stats.vercel.app/api/top-langs/?username=${u}&theme=tokyonight&hide_border=true&layout=compact&langs_count=8&bg_color=00000000`,
+];
+
 export default function GitHubStats() {
   return (
-    <section id="github" className="py-20 px-6 md:px-[6%]">
-      <h2 className="text-4xl font-bold text-center mb-12">
-        GitHub{" "}
-        <span className="bg-gradient-to-r from-violet-600 to-purple-400 bg-clip-text text-transparent">
-          Stats
-        </span>
-      </h2>
+    <SectionWrapper id="github" className="py-24 px-6 md:px-[8%]">
+      <TransmitText text="GitHub Pulse" as="h2" className="text-4xl font-bold text-center mb-4" />
+      <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
+        // live.signal
+      </p>
 
-      <div className="flex flex-wrap justify-center gap-4 mb-6">
-        {[
-          `https://github-readme-stats.vercel.app/api?username=${u}&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&show_icons=true`,
-          `https://streak-stats.demolab.com/?user=${u}&theme=tokyonight&hide_border=true`,
-          `https://github-readme-stats.vercel.app/api/top-langs/?username=${u}&theme=tokyonight&hide_border=true&layout=compact&langs_count=8`,
-        ].map((src, i) => (
-          <motion.img
+      <div className="flex flex-wrap justify-center gap-4 mb-8 max-w-5xl mx-auto">
+        {STATS.map((src, i) => (
+          <motion.div
             key={i}
-            src={src}
-            alt="GitHub stat"
-            loading="lazy"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            whileHover={{ scale: 1.03 }}
-            className="rounded-xl max-w-full"
-          />
+            whileHover={{ y: -4, boxShadow: "0 0 30px rgba(124,58,237,0.2)" }}
+            className="glass-card signal-border overflow-hidden"
+          >
+            <img src={src} alt="GitHub stat" loading="lazy" className="max-w-full block" />
+          </motion.div>
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-8"
-      >
-        <img
-          src={`https://github-readme-activity-graph.vercel.app/graph?username=${u}&theme=tokyo-night&hide_border=true&area=true`}
-          alt="Contribution Graph"
-          loading="lazy"
-          className="rounded-xl max-w-full mx-auto hover:scale-[1.01] transition-transform"
-        />
-      </motion.div>
 
       <div className="text-center">
         <a
           href={`https://github.com/${u}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-gradient-to-r from-violet-600 to-purple-500 text-white shadow-lg shadow-violet-500/30 hover:opacity-90 transition-opacity"
+          data-cursor="Open GitHub"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium border transition-all"
+          style={{ borderColor: "rgba(124,58,237,0.4)", color: "#22D3EE" }}
         >
           <GithubIcon /> Visit GitHub Profile
         </a>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

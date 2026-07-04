@@ -1,70 +1,122 @@
 "use client";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import SectionWrapper from "@/components/synapse/SectionWrapper";
+import TransmitText from "@/components/synapse/TransmitText";
 import { PROJECTS } from "@/lib/data";
 
-const btn = "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors";
+const GithubIcon = () => (
+  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+  </svg>
+);
+
+function ProjectCard({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotateX = useTransform(y, [-60, 60], [6, -6]);
+  const rotateY = useTransform(x, [-60, 60], [-6, 6]);
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    const rect = cardRef.current!.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  };
+  const onMouseLeave = () => { x.set(0); y.set(0); };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.12, duration: 0.6 }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 800 }}
+      className="glass-card signal-border overflow-hidden"
+    >
+      {/* Browser mockup bar */}
+      <div
+        className="flex items-center gap-1.5 px-4 py-2.5 border-b"
+        style={{ borderColor: "rgba(124,58,237,0.15)", background: "rgba(124,58,237,0.05)" }}
+      >
+        {["#7C3AED", "#3B82F6", "#22D3EE"].map((c) => (
+          <div key={c} className="w-2.5 h-2.5 rounded-full" style={{ background: c, opacity: 0.7 }} />
+        ))}
+        <span className="ml-2 font-mono text-xs" style={{ color: "rgba(226,232,240,0.3)" }}>
+          {p.live || "localhost:3000"}
+        </span>
+      </div>
+
+      <div className="p-5">
+        <div className="text-2xl mb-3">{p.icon}</div>
+        <h3 className="font-semibold mb-2 text-sm" style={{ color: "#e2e8f0" }}>{p.title}</h3>
+
+        {/* Problem → Solution → Impact layout */}
+        <p className="text-xs leading-relaxed mb-4" style={{ color: "rgba(226,232,240,0.5)" }}>{p.desc}</p>
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {p.tags.map((t) => (
+            <span
+              key={t}
+              className="font-mono text-xs px-2 py-0.5 rounded"
+              style={{
+                background: "rgba(124,58,237,0.12)",
+                color: "rgba(34,211,238,0.8)",
+                border: "1px solid rgba(124,58,237,0.2)",
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex gap-2">
+          {p.live && (
+            <a
+              href={p.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="Live Demo"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium transition-all"
+              style={{
+                background: "linear-gradient(135deg, #7C3AED, #3B82F6)",
+                color: "#fff",
+                boxShadow: "0 0 12px rgba(124,58,237,0.3)",
+              }}
+            >
+              <ExternalLink className="h-3 w-3" /> Live Demo
+            </a>
+          )}
+          <a
+            href={p.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="Open GitHub"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium border transition-all"
+            style={{ borderColor: "rgba(124,58,237,0.4)", color: "rgba(34,211,238,0.8)" }}
+          >
+            <GithubIcon /> GitHub
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 px-6 md:px-[6%] bg-muted/30">
-      <h2 className="text-4xl font-bold text-center mb-12">
-        My{" "}
-        <span className="bg-gradient-to-r from-violet-600 to-purple-400 bg-clip-text text-transparent">
-          Projects
-        </span>
-      </h2>
+    <SectionWrapper id="projects" className="py-24 px-6 md:px-[8%]">
+      <TransmitText text="Projects" as="h2" className="text-4xl font-bold text-center mb-4" />
+      <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
+        // signals.deployed
+      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto mb-8">
-        {PROJECTS.map((p, i) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            whileHover={{ y: -6, boxShadow: "0 20px 50px rgba(124,58,237,0.25)" }}
-            className="relative rounded-2xl border border-border bg-card/50 backdrop-blur-sm p-6 hover:border-violet-600 transition-colors overflow-hidden group"
-          >
-            <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-violet-600 to-purple-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-            <div className="text-3xl mb-3">{p.icon}</div>
-            <h3 className="font-semibold mb-2">{p.title}</h3>
-            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{p.desc}</p>
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {p.tags.map((t) => (
-                <span
-                  key={t}
-                  className="text-xs px-2.5 py-1 rounded-full bg-violet-600/10 text-purple-400 border border-violet-600/25"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-            <div className="flex gap-2 flex-wrap">
-              {p.live && (
-                <a
-                  href={p.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${btn} bg-gradient-to-r from-violet-600 to-purple-500 text-white hover:opacity-90`}
-                >
-                  <ExternalLink className="h-3.5 w-3.5" /> Live Demo
-                </a>
-              )}
-              <a
-                href={p.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${btn} border border-violet-600 text-purple-400 hover:bg-violet-600 hover:text-white`}
-              >
-                <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                </svg>
-                GitHub
-              </a>
-            </div>
-          </motion.div>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto mb-10">
+        {PROJECTS.map((p, i) => <ProjectCard key={p.title} p={p} i={i} />)}
       </div>
 
       <div className="text-center">
@@ -72,14 +124,17 @@ export default function Projects() {
           href="https://github.com/shraa25"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium bg-gradient-to-r from-violet-600 to-purple-500 text-white shadow-lg shadow-violet-500/30 hover:opacity-90 transition-opacity"
+          data-cursor="Open GitHub"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium border transition-all"
+          style={{
+            borderColor: "rgba(124,58,237,0.4)",
+            color: "#22D3EE",
+            boxShadow: "0 0 20px rgba(124,58,237,0.1)",
+          }}
         >
-          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-          </svg>
-          View All on GitHub
+          <GithubIcon /> View All on GitHub
         </a>
       </div>
-    </section>
+    </SectionWrapper>
   );
 }

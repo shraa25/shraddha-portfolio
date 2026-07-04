@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -9,14 +8,13 @@ const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#education", label: "Education" },
   { href: "#experience", label: "Journey" },
-  { href: "#skills", label: "Skills" },
+  { href: "#skills", label: "Synapses" },
   { href: "#projects", label: "Projects" },
   { href: "#achievements", label: "Achievements" },
   { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
@@ -24,15 +22,10 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
-      const sections = document.querySelectorAll("section[id]");
-      sections.forEach((s) => {
+      document.querySelectorAll("section[id]").forEach((s) => {
         const el = s as HTMLElement;
-        if (
-          window.scrollY + 120 >= el.offsetTop &&
-          window.scrollY + 120 < el.offsetTop + el.offsetHeight
-        ) {
+        if (window.scrollY + 120 >= el.offsetTop && window.scrollY + 120 < el.offsetTop + el.offsetHeight)
           setActive(el.id);
-        }
       });
     };
     window.addEventListener("scroll", onScroll);
@@ -43,57 +36,65 @@ export default function Navbar() {
     <nav
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
+        scrolled ? "glass-card border-b" : "bg-transparent border-transparent"
       )}
+      style={{ borderColor: scrolled ? "rgba(124,58,237,0.15)" : "transparent" }}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <span className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-400 bg-clip-text text-transparent">
-          SM
+        <span
+          className="font-mono font-bold text-lg tracking-widest"
+          style={{ background: "linear-gradient(135deg, #7C3AED, #22D3EE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+        >
+          SYNAPSE
         </span>
 
-        <ul className="hidden md:flex items-center gap-7">
+        <ul className="hidden md:flex items-center gap-6">
           {NAV_LINKS.map(({ href, label }) => (
             <li key={href}>
               <a
                 href={href}
+                data-cursor={label}
                 className={cn(
-                  "text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-purple-400 after:transition-all after:duration-300",
+                  "font-mono text-xs tracking-wider transition-all duration-200 relative",
                   active === href.slice(1)
-                    ? "text-foreground after:w-full"
-                    : "text-muted-foreground hover:text-foreground after:w-0 hover:after:w-full"
+                    ? "text-cyan-300"
+                    : "hover:text-cyan-300"
                 )}
+                style={{ color: active === href.slice(1) ? "#22D3EE" : "rgba(226,232,240,0.45)" }}
               >
+                {active === href.slice(1) && (
+                  <span
+                    className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full node-glow"
+                    style={{ background: "#22D3EE" }}
+                  />
+                )}
                 {label}
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-violet-600 transition-colors"
-          >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
-          <button
-            className="md:hidden text-foreground"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+          style={{ color: "rgba(226,232,240,0.7)" }}
+          aria-label="Toggle menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-background border-b border-border px-6 pb-4 flex flex-col gap-3">
+        <div
+          className="md:hidden glass-card border-t px-6 pb-5 flex flex-col gap-4"
+          style={{ borderColor: "rgba(124,58,237,0.15)" }}
+        >
           {NAV_LINKS.map(({ href, label }) => (
             <a
               key={href}
               href={href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="font-mono text-xs tracking-wider transition-colors"
+              style={{ color: "rgba(226,232,240,0.55)" }}
               onClick={() => setOpen(false)}
             >
               {label}

@@ -1,77 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Rocket, Send, Download } from "lucide-react";
+import TransmitText from "@/components/synapse/TransmitText";
 import { ROLES } from "@/lib/data";
+import { useState, useEffect, useRef } from "react";
 
-function ParticleCanvas() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const particles = Array.from({ length: 70 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 1.5 + 0.5,
-      dx: (Math.random() - 0.5) * 0.4,
-      dy: (Math.random() - 0.5) * 0.4,
-      alpha: Math.random() * 0.5 + 0.2,
-    }));
-
-    let raf: number;
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const isDark = document.documentElement.classList.contains("dark");
-      const c = isDark ? "168,85,247" : "124,58,237";
-      particles.forEach((p) => {
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${c},${p.alpha})`;
-        ctx.fill();
-      });
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(${c},${0.12 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-      raf = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-    />
-  );
-}
+const NeuralNetwork = dynamic(() => import("@/components/synapse/NeuralNetwork"), { ssr: false });
 
 function TypedText() {
   const [text, setText] = useState("");
@@ -81,86 +16,120 @@ function TypedText() {
 
   useEffect(() => {
     const current = ROLES[roleIdx];
-    const timeout = setTimeout(
-      () => {
-        if (!deleting) {
-          setText(current.substring(0, charRef.current + 1));
-          charRef.current++;
-          if (charRef.current === current.length)
-            setTimeout(() => setDeleting(true), 1800);
-        } else {
-          setText(current.substring(0, charRef.current - 1));
-          charRef.current--;
-          if (charRef.current === 0) {
-            setDeleting(false);
-            setRoleIdx((i) => (i + 1) % ROLES.length);
-          }
-        }
-      },
-      deleting ? 60 : 100
-    );
+    const timeout = setTimeout(() => {
+      if (!deleting) {
+        setText(current.substring(0, charRef.current + 1));
+        charRef.current++;
+        if (charRef.current === current.length) setTimeout(() => setDeleting(true), 1800);
+      } else {
+        setText(current.substring(0, charRef.current - 1));
+        charRef.current--;
+        if (charRef.current === 0) { setDeleting(false); setRoleIdx((i) => (i + 1) % ROLES.length); }
+      }
+    }, deleting ? 55 : 90);
     return () => clearTimeout(timeout);
   }, [text, deleting, roleIdx]);
 
   return (
-    <span className="text-purple-400">
-      {text}
-      <span className="animate-pulse">|</span>
+    <span className="font-mono" style={{ color: "#22D3EE" }}>
+      {text}<span className="animate-pulse opacity-80">▋</span>
     </span>
   );
 }
+
+const btnBase = "inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none";
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-between px-6 md:px-[6%] pt-28 pb-16 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-between px-6 md:px-[8%] pt-28 pb-16 overflow-hidden"
     >
-      <ParticleCanvas />
-
+      {/* Left content */}
       <motion.div
-        className="relative z-10 max-w-xl"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
+        className="relative z-10 max-w-lg"
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-purple-400 text-lg mb-2">Hi there 👋, I&apos;m</p>
-        <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-gradient-to-br from-foreground via-foreground to-purple-400 bg-clip-text text-transparent mb-4">
-          Shraddha More
-        </h1>
-        <h2 className="text-xl md:text-2xl font-normal min-h-8 mb-4">
+        <motion.p
+          className="font-mono text-sm mb-3 tracking-widest uppercase"
+          style={{ color: "rgba(34,211,238,0.7)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          // signal.init()
+        </motion.p>
+
+        <TransmitText
+          text="Shraddha More"
+          as="h1"
+          delay={0.4}
+          className="text-5xl md:text-6xl font-bold leading-tight mb-3"
+        />
+
+        <div className="text-xl md:text-2xl font-normal min-h-8 mb-5">
           <TypedText />
-        </h2>
-        <p className="text-muted-foreground max-w-md mb-8 leading-relaxed">
-          Motivated B.Sc. Computer Science graduate (2026) passionate about
-          building scalable web applications and AI-powered solutions.
-          Experienced in Python, Django, Flask, SQL, Machine Learning, and cloud
-          deployment.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          <a href="#projects" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium bg-gradient-to-r from-violet-600 to-purple-500 text-white shadow-lg shadow-violet-500/30 hover:opacity-90 transition-opacity">
+        </div>
+
+        <motion.p
+          className="text-sm leading-relaxed mb-8 max-w-md"
+          style={{ color: "rgba(226,232,240,0.55)" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+        >
+          Motivated B.Sc. Computer Science graduate (2026) building scalable
+          AI-powered systems. Specialising in Python, Django, Flask, Machine
+          Learning, and cloud deployment.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-wrap gap-3"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4 }}
+        >
+          <a
+            href="#projects"
+            data-cursor="View Projects"
+            className={`${btnBase} text-white`}
+            style={{
+              background: "linear-gradient(135deg, #7C3AED, #3B82F6)",
+              boxShadow: "0 0 20px rgba(124,58,237,0.4)",
+            }}
+          >
             <Rocket className="h-4 w-4" /> View Projects
           </a>
-          <a href="#contact" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-violet-600 text-purple-400 hover:bg-violet-600 hover:text-white transition-colors">
+          <a
+            href="#contact"
+            data-cursor="Contact"
+            className={`${btnBase} border`}
+            style={{ borderColor: "rgba(124,58,237,0.5)", color: "#22D3EE" }}
+          >
             <Send className="h-4 w-4" /> Contact Me
           </a>
-          <a href="/resume.pdf" download className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border border-violet-600 text-purple-400 hover:bg-violet-600 hover:text-white transition-colors">
+          <a
+            href="/resume.pdf"
+            download
+            data-cursor="Download"
+            className={`${btnBase} border`}
+            style={{ borderColor: "rgba(59,130,246,0.4)", color: "rgba(226,232,240,0.7)" }}
+          >
             <Download className="h-4 w-4" /> Resume
           </a>
-        </div>
+        </motion.div>
       </motion.div>
 
+      {/* Neural Network */}
       <motion.div
-        className="relative z-10 hidden md:flex items-center justify-center"
-        initial={{ opacity: 0, scale: 0.8 }}
+        className="relative z-10 hidden md:block"
+        initial={{ opacity: 0, scale: 0.85 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
+        transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="w-64 h-64 rounded-full p-1 bg-gradient-to-br from-violet-600 via-purple-400 to-cyan-400 animate-spin [animation-duration:6s]">
-          <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden animate-spin [animation-duration:6s] [animation-direction:reverse]">
-            <span className="text-6xl font-bold text-purple-400">SM</span>
-          </div>
-        </div>
+        <NeuralNetwork />
       </motion.div>
     </section>
   );

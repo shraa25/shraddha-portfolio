@@ -4,10 +4,17 @@ import { ArrowUp } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="text-center py-8 px-4 border-t border-border text-muted-foreground text-sm space-y-1">
-      <p>Designed &amp; Developed by <span className="text-purple-400 font-semibold">Shraddha More</span></p>
-      <p className="text-purple-400 text-xs">Python Developer | AI &amp; Data Science Enthusiast</p>
-      <p className="text-xs">© 2026 All Rights Reserved</p>
+    <footer
+      className="text-center py-10 px-4 border-t"
+      style={{ borderColor: "rgba(124,58,237,0.15)" }}
+    >
+      <p className="font-mono text-xs mb-1" style={{ color: "rgba(226,232,240,0.35)" }}>
+        // signal.end — designed &amp; built by{" "}
+        <span style={{ color: "#22D3EE" }}>Shraddha More</span>
+      </p>
+      <p className="font-mono text-xs" style={{ color: "rgba(124,58,237,0.5)" }}>
+        Python Developer · AI &amp; Data Science · © 2026
+      </p>
     </footer>
   );
 }
@@ -23,9 +30,15 @@ export function BackToTop() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-8 right-8 z-50 w-10 h-10 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 text-white flex items-center justify-center shadow-lg shadow-violet-500/40 transition-all duration-300 hover:-translate-y-1 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5 pointer-events-none"}`}
+      data-cursor="Top"
+      aria-label="Back to top"
+      className={`fixed bottom-8 right-8 z-50 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 node-glow ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+      style={{
+        background: "linear-gradient(135deg, #7C3AED, #22D3EE)",
+        boxShadow: "0 0 20px rgba(124,58,237,0.5)",
+      }}
     >
-      <ArrowUp className="h-4 w-4" />
+      <ArrowUp className="h-4 w-4 text-white" />
     </button>
   );
 }

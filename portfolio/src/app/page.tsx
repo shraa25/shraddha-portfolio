@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="pl-0 lg:pl-10">
         <Hero />
         <About />
         <Education />

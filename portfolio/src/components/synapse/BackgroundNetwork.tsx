@@ -40,7 +40,13 @@ export default function BackgroundNetwork() {
     resize();
     window.addEventListener("resize", resize);
 
-    const COLORS = ["124,58,237", "59,130,246", "34,211,238"];
+    const getColors = () => {
+      const p = getComputedStyle(document.documentElement).getPropertyValue("--particle").trim() || "168,85,247";
+      return [p, p, p];
+    };
+    let COLORS = getColors();
+    const observer = new MutationObserver(() => { COLORS = getColors(); });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     const MAX_DIST = 140;
 
     const draw = () => {
@@ -94,6 +100,7 @@ export default function BackgroundNetwork() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      observer.disconnect();
     };
   }, [reduced]);
 

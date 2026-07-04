@@ -9,8 +9,8 @@ export default function Skills() {
   return (
     <SectionWrapper id="skills" className="py-24 px-6 md:px-[8%]">
       <TransmitText text="Synapses" as="h2" className="text-4xl font-bold text-center mb-4" />
-      <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "rgba(34,211,238,0.5)" }}>
-        {"// skills.graph — hover a node to fire it"}
+      <p className="text-center font-mono text-xs mb-12 tracking-widest" style={{ color: "var(--accent)", opacity: 0.6 }}>
+        {"// skills.graph \u2014 hover a node to fire it"}
       </p>
       <div className="max-w-4xl mx-auto glass-card p-4">
         <SkillsGraph />

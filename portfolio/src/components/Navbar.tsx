@@ -2,16 +2,17 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const NAV_LINKS = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#education", label: "Education" },
-  { href: "#experience", label: "Journey" },
-  { href: "#skills", label: "Synapses" },
-  { href: "#projects", label: "Projects" },
+  { href: "#home",         label: "Home"         },
+  { href: "#about",        label: "About"        },
+  { href: "#education",    label: "Education"    },
+  { href: "#experience",   label: "Journey"      },
+  { href: "#skills",       label: "Synapses"     },
+  { href: "#projects",     label: "Projects"     },
   { href: "#achievements", label: "Achievements" },
-  { href: "#contact", label: "Contact" },
+  { href: "#contact",      label: "Contact"      },
 ];
 
 export default function Navbar() {
@@ -35,20 +36,24 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Main navigation"
-      className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        scrolled ? "glass-card border-b" : "bg-transparent border-transparent"
-      )}
-      style={{ borderColor: scrolled ? "rgba(124,58,237,0.15)" : "transparent" }}
+      className={cn("fixed top-0 w-full z-50 transition-all duration-300", scrolled ? "border-b" : "border-transparent")}
+      style={{
+        background: scrolled ? "var(--navbar-bg)" : "transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+        borderColor: scrolled ? "var(--border)" : "transparent",
+      }}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo */}
         <span
           className="font-mono font-bold text-lg tracking-widest"
-          style={{ background: "linear-gradient(135deg, #7C3AED, #22D3EE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+          style={{ background: "linear-gradient(135deg, var(--primary), var(--accent))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
         >
           SYNAPSE
         </span>
 
+        {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-6">
           {NAV_LINKS.map(({ href, label }) => (
             <li key={href}>
@@ -56,18 +61,13 @@ export default function Navbar() {
                 href={href}
                 data-cursor={label}
                 aria-current={active === href.slice(1) ? "page" : undefined}
-                className={cn(
-                  "font-mono text-xs tracking-wider transition-all duration-200 relative",
-                  active === href.slice(1)
-                    ? "text-cyan-300"
-                    : "hover:text-cyan-300"
-                )}
-                style={{ color: active === href.slice(1) ? "#22D3EE" : "rgba(226,232,240,0.45)" }}
+                className="font-mono text-xs tracking-wider transition-all duration-200 relative"
+                style={{ color: active === href.slice(1) ? "var(--accent)" : "var(--text-secondary)" }}
               >
                 {active === href.slice(1) && (
                   <span
                     className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full node-glow"
-                    style={{ background: "#22D3EE" }}
+                    style={{ background: "var(--accent)" }}
                   />
                 )}
                 {label}
@@ -76,35 +76,50 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-          style={{ color: "rgba(226,232,240,0.7)" }}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        {/* Desktop: theme switcher + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <div className="hidden md:block">
+            <ThemeSwitcher />
+          </div>
+          <button
+            className="md:hidden"
+            onClick={() => setOpen(!open)}
+            style={{ color: "var(--text-secondary)" }}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
+      {/* Mobile menu */}
       {open && (
         <div
           id="mobile-nav"
-          className="md:hidden glass-card border-t px-6 pb-5 flex flex-col gap-4"
-          style={{ borderColor: "rgba(124,58,237,0.15)" }}
+          className="md:hidden border-t px-6 pb-5 flex flex-col gap-4"
+          style={{
+            background: "var(--navbar-bg)",
+            backdropFilter: "blur(16px)",
+            borderColor: "var(--border)",
+          }}
         >
           {NAV_LINKS.map(({ href, label }) => (
             <a
               key={href}
               href={href}
               className="font-mono text-xs tracking-wider transition-colors"
-              style={{ color: "rgba(226,232,240,0.55)" }}
+              style={{ color: "var(--text-secondary)" }}
               onClick={() => setOpen(false)}
             >
               {label}
             </a>
           ))}
+          {/* Theme switcher in mobile menu */}
+          <div className="pt-2 border-t" style={{ borderColor: "var(--border)" }}>
+            <ThemeSwitcher />
+          </div>
         </div>
       )}
     </nav>

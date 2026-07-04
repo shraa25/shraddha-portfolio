@@ -20,7 +20,7 @@ export default function GitHubStats() {
         </span>
       </h2>
 
-      <div className="flex flex-wrap justify-center gap-4 mb-6">
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
         {[
           `https://github-readme-stats.vercel.app/api?username=${u}&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true&show_icons=true`,
           `https://streak-stats.demolab.com/?user=${u}&theme=tokyonight&hide_border=true`,
@@ -40,20 +40,6 @@ export default function GitHubStats() {
           />
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-8"
-      >
-        <img
-          src={`https://github-readme-activity-graph.vercel.app/graph?username=${u}&theme=tokyo-night&hide_border=true&area=true`}
-          alt="Contribution Graph"
-          loading="lazy"
-          className="rounded-xl max-w-full mx-auto hover:scale-[1.01] transition-transform"
-        />
-      </motion.div>
 
       <div className="text-center">
         <a

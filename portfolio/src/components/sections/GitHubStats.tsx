@@ -26,7 +26,7 @@ export default function GitHubStats() {
         {STATS.map((src, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ y: -4 }} className="glass-card signal-border overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt={`GitHub stat card ${i + 1}`} loading="lazy" width={495} height={195} className="max-w-full block" />
+            <img src={src} alt={`GitHub stat card ${i + 1}`} loading="lazy" width={495} height={195} className="max-w-full block" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
           </motion.div>
         ))}
       </div>

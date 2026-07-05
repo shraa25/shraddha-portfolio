@@ -25,10 +25,10 @@ export default function Education() {
               </span>
             </div>
             <p className="text-xs leading-relaxed mb-4" style={{ color: "var(--text-secondary)" }}>
-              Pursuing B.Sc. Computer Science with an outstanding CGPA of 9.50 (A Grade). Active member of Coding Club, Placement Cell Volunteer, and Tech Fest Volunteer.
+              Pursuing B.Sc. Computer Science with an outstanding CGPA of 9.40 (A+ Grade). Active member of Coding Club, Placement Cell Volunteer, and Tech Fest Volunteer.
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
-              {["CGPA: 9.50","A Grade","Coding Club","Placement Cell","Tech Fest"].map((t) => (
+              {["CGPA: 9.40","A+ Grade","Coding Club","Placement Cell","Tech Fest"].map((t) => (
                 <span key={t} className="font-mono text-xs px-2 py-0.5 rounded" style={{ background: "var(--surface-2)", color: "var(--accent)", border: "1px solid var(--border)" }}>{t}</span>
               ))}
             </div>

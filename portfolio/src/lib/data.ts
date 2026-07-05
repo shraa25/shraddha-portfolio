@@ -52,18 +52,10 @@ export const PROJECTS = [
     github: "https://github.com/shraa25/student-management-system",
     live: "https://student-management-system-4-55ii.onrender.com",
   },
-  {
-    icon: "🤖",
-    title: "ML Classification Project",
-    desc: "Built machine learning models for classification using Scikit-learn and TensorFlow with preprocessing, feature engineering, training, testing, and evaluation on real-world datasets.",
-    tags: ["Python","Scikit-Learn","TensorFlow","Pandas","NumPy"],
-    github: "https://github.com/shraa25",
-    live: null,
-  },
 ];
 
 export const ACHIEVEMENTS = [
-  { icon: "🎓", title: "B.Sc. Computer Science", desc: "CGPA 9.50 · A Grade" },
+  { icon: "🎓", title: "B.Sc. Computer Science", desc: "CGPA 9.40 · A+ Grade" },
   { icon: "🚀", title: "Multiple Full Stack Projects", desc: "Built production-ready Django & Flask applications" },
   { icon: "🔥", title: "Daily Python Learning", desc: "Consistent daily coding practice & problem solving" },
   { icon: "🧠", title: "AI & Data Science Enthusiast", desc: "Hands-on ML models with TensorFlow & scikit-learn" },
@@ -97,11 +89,11 @@ export const JOURNEY = [
 ];
 
 export const ABOUT_CARDS = [
-  { icon: "🎓", title: "Education", desc: "B.Sc. Computer Science · CGPA 9.50 · JVM Mehta Degree College" },
+  { icon: "🎓", title: "Education", desc: "B.Sc. Computer Science · CGPA 9.40 · JVM Mehta Degree College" },
   { icon: "💻", title: "Python Developer", desc: "Building scalable backend applications with Django, Flask & REST APIs" },
   { icon: "🧠", title: "AI & ML Enthusiast", desc: "Classification models, Deep Learning, TensorFlow & scikit-learn" },
   { icon: "☁️", title: "Cloud & DevOps", desc: "AWS basics, cloud deployment, Git & GitHub version control" },
-  { icon: "📍", title: "Location", desc: "Kasheli, Balkum, Thane, Maharashtra" },
+  { icon: "📍", title: "Location", desc: "Thane, Maharashtra" },
   { icon: "🎯", title: "Goal", desc: "AI Engineer / Data Scientist building real-world intelligent solutions" },
 ];
 

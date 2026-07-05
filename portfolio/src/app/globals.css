@@ -83,15 +83,15 @@
   --surface-2:     #f1f5f9;
   --card:          #ffffff;
   --card-hover:    #f8fafc;
-  --text:          #0f172a;
-  --text-secondary:#64748b;
-  --border:        rgba(15,23,42,0.08);
-  --border-hover:  rgba(79,140,255,0.4);
+  --text:          #020617;
+  --text-secondary:#1e293b;
+  --border:        rgba(15,23,42,0.12);
+  --border-hover:  rgba(79,140,255,0.5);
   --primary:       #4F8CFF;
   --primary-2:     #6366f1;
   --secondary:     #8B5CF6;
   --accent:        #0ea5e9;
-  --shadow:        rgba(15,23,42,0.08);
+  --shadow:        rgba(15,23,42,0.10);
   --glow:          rgba(79,140,255,0.15);
   --glow-accent:   rgba(14,165,233,0.12);
   --particle:      79,140,255;
@@ -111,11 +111,11 @@
   --mono-filter:   none;
 
   --background:    #ffffff;
-  --foreground:    #0f172a;
-  --card-foreground:#0f172a;
+  --foreground:    #020617;
+  --card-foreground:#020617;
   --primary-foreground:#ffffff;
   --muted:         #f1f5f9;
-  --muted-foreground:#64748b;
+  --muted-foreground:#1e293b;
   --input:         #f1f5f9;
   --ring:          #4F8CFF;
 }
@@ -278,6 +278,17 @@
 }
 
 [data-theme="light"] .noise { opacity: 0.012; }
+
+[data-theme="light"] body {
+  font-weight: 500;
+}
+
+[data-theme="light"] p,
+[data-theme="light"] span,
+[data-theme="light"] li,
+[data-theme="light"] a {
+  font-weight: 500;
+}
 
 /* ── Signal spine ── */
 .signal-spine {

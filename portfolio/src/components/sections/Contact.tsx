@@ -47,7 +47,7 @@ export default function Contact() {
     setStatus("loading");
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID,
-        { from_name: data.name, from_email: data.email, message: data.message },
+        { name: data.name, email: data.email, message: data.message, phone: "", title: "", time: new Date().toLocaleString() },
         EMAILJS_PUBLIC_KEY
       );
       setStatus("success"); reset();

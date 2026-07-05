@@ -17,7 +17,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const EMAILJS_SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  ?? "service_dgxw8c4";
-const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "template_mgfbtre";
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "template_1ju9p2c";
 const EMAILJS_PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  ?? "fg1UN6keOs_rxZ7vN";
 
 const GithubIcon = () => (

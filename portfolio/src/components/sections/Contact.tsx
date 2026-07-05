@@ -16,9 +16,9 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
-const EMAILJS_SERVICE_ID  = "service_dgxw8c4";
-const EMAILJS_TEMPLATE_ID = "template_mgfbtre";
-const EMAILJS_PUBLIC_KEY  = "fg1UN6keOs_rxZ7vN";
+const EMAILJS_SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const EMAILJS_PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 const GithubIcon = () => (
   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
